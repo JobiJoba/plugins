@@ -60,8 +60,8 @@ pnpm --filter @placard-official/places.menus build
 pnpm --filter @placard-official/places.pick build
 ```
 
-`pnpm test` runs tests only in packages that define a test script. Currently Menus
-has unit tests; Pick has no automated test script. Menus also has optional browser
+`pnpm test` runs tests only in packages that define a test script. Both Menus and Pick
+have unit tests. Menus also has optional browser
 tests against a real Placard host; see its [test setup](plugins/places.menus/README.md#browser-tests-against-core).
 
 Each build creates:
@@ -123,7 +123,7 @@ builds only that module and publishes both archives as GitHub Release assets.
 Browser tests are separate from this workflow.
 
 For Pick, substitute `places.pick`, `@placard-official/places.pick` and its next
-version, and omit the unit-test command. Releasing one module does not require
+version, and use its unit-test command. Releasing one module does not require
 bumping or releasing another.
 
 ## Add a module
