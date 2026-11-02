@@ -1,49 +1,64 @@
-# places.pick — Placard Pick module
+# Placard plugins
 
-Standalone [Placard](https://github.com/JobiJoba/Placard) Marketplace plugin. Spins one place from your library (any category, open tonight, near you, avoid recent).
+Independent Placard modules in one repository. Each module has its own manifest,
+version, build artifacts and GitHub Releases. No npm publishing is needed.
 
-## Install on a Placard instance
+| Module | Package | Install in Placard |
+| --- | --- | --- |
+| [Menus](plugins/places.menus) | `@placard-official/places.menus` | `https://github.com/JobiJoba/plugins#places.menus` |
+| [Pick](plugins/places.pick) | `@placard-official/places.pick` | `https://github.com/JobiJoba/plugins#places.pick` |
 
-**From GitHub (recommended once you publish a Release):**
+## Install
 
-1. Settings → Module marketplace → **Install from GitHub**
-2. Paste this repo URL (or `owner/repo`)
-3. Placard installs the latest Release asset (`.placard-module` or `.zip`)
+In **Settings → Module marketplace → Install from GitHub**, paste the module's
+install URL above. The host must support the `#module.id` selector for repositories
+with multiple modules. Each module receives only its own stable releases and updates.
+Older Placard hosts can upload the `.placard-module` or `.zip` from the appropriate
+[release](https://github.com/JobiJoba/plugins/releases) instead. A bare repository URL
+selects the repository's latest release; use the full module URL to choose explicitly.
 
-**From a local zip:**
-
-1. `pnpm install && pnpm build`
-2. Upload `dist/places.pick-0.1.1.zip` (or `.placard-module`) in Settings → Module marketplace
-
-Then enable the module and show it in nav.
+The existing module IDs (`places.pick` and `places.menus`) stay the same, preserving
+module settings and data when an existing installation is replaced.
 
 ## Develop
 
-```bash
+Requires Node 24+ and pnpm 12.4.1.
+
+```sh
 pnpm install
-pnpm build      # → pack/ + dist/*.zip + dist/*.placard-module
 pnpm typecheck
+pnpm test
+pnpm build
+
+# Work on just one module
+pnpm --filter @placard-official/places.menus build
+pnpm --filter @placard-official/places.pick typecheck
 ```
 
-Layout:
+Artifacts live in `plugins/<moduleId>/dist/`. All packages share the root workspace
+lockfile. The modules build independently of the Placard core repository. Menus' optional
+browser tests use a sibling `Placard` checkout (or `PLACARD_CORE_DIR`).
 
-- `placard.module.json` — manifest
-- `src/server` — `createModule()` HTTP + MCP
-- `src/web` — `PickPage` (uses host React bridge shims)
-- `scripts/build.mjs` — esbuild + zip
+## Release one module
 
-## Publishing a Release
+```sh
+pnpm release:prepare places.menus 0.1.1
+git add plugins/places.menus/package.json plugins/places.menus/placard.module.json
+git commit -m "Release places.menus 0.1.1"
+git push origin main
+git tag places.menus@0.1.1
+git push origin places.menus@0.1.1
+```
 
-1. Bump `version` in **both** `package.json` and `placard.module.json` (must match)
-2. Commit and push to `main`
-3. Tag and push: `git tag v0.1.1 && git push origin v0.1.1`
-4. GitHub Actions **Release** builds the plugin and publishes a GitHub Release with:
-   - `places.pick-<version>.placard-module` (preferred for Placard “Install from GitHub”)
-   - `places.pick-<version>.zip`
+The release workflow checks the tag against that module's package and manifest versions,
+typechecks, tests and builds only that module, and publishes its two installable assets.
+Pick releases use the same commands with `places.pick` and its own version. Releasing one
+module does not require bumping or releasing any other module.
 
-CI on `main` / PRs runs typecheck + build.
+To add a module, create `plugins/<moduleId>` with a package, `placard.module.json`, and
+`typecheck` / `build` scripts. Its build should emit `<moduleId>-<version>.placard-module`
+and `.zip` under its `dist/` directory. Add it to the table above.
 
-## Notes
-
-- Does **not** depend on the Placard monorepo. Host contracts are vendored in `src/placard-sdk.ts` (sdk major `0`).
-- Web UI must not ship React — shims alias to `globalThis.__PLACARD_PLUGIN__`.
+Pick's Git history was retained from its original repository; source files now live under
+`plugins/places.pick`. Menus includes its item-image upload support. The old Pick repository
+remains available for users on its original install URL.

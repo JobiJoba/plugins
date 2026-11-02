@@ -1,20 +1,9 @@
 name: CI
-
-on:
-  pull_request:
-  push:
-    branches: [main]
-
-concurrency:
-  group: ci-${{ github.ref }}
-  cancel-in-progress: true
-
+on: [push, pull_request]
 permissions:
   contents: read
-
 jobs:
   check:
-    name: Typecheck + build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -25,9 +14,5 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm typecheck
+      - run: pnpm test
       - run: pnpm build
-      - name: Assert release artifacts exist
-        run: |
-          VERSION="$(node -p "require('./package.json').version")"
-          test -f "dist/places.pick-${VERSION}.placard-module"
-          test -f "dist/places.pick-${VERSION}.zip"
