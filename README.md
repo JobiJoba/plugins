@@ -9,6 +9,7 @@ separate module server is required.
 
 | Module | What it adds | Host requirements | Documentation |
 | --- | --- | --- | --- |
+| **Day Out** (`places.day-out`) | Private outings around a saved place, nearby suggestions and MCP editing | SDK 1, `persistent-data` | [Day Out guide](plugins/places.day-out/README.md) |
 | **Board** (`places.board`) | Printable travel boards from 22 places, with editing and 3D preview | SDK 1, `persistent-data` | [Board guide](plugins/places.board/README.md) |
 | **Menus** (`places.menus`) | Structured menus, item photos and MCP editing on place details | SDK 0.2.0+, `place-sections` and `persistent-data` | [Menus guide](plugins/places.menus/README.md) |
 | **Pick** (`places.pick`) | A random place from your library, with category, list, tag, opening-hours and distance filters | SDK 0.2.0+, module uploads and the host web bridge | [Pick guide](plugins/places.pick/README.md) |
@@ -20,6 +21,7 @@ separate module server is required.
 
    | Module | Install URL |
    | --- | --- |
+   | Day Out | `https://github.com/JobiJoba/plugins#places.day-out` |
    | Board | `https://github.com/JobiJoba/plugins#places.board` |
    | Menus | `https://github.com/JobiJoba/plugins#places.menus` |
    | Pick | `https://github.com/JobiJoba/plugins#places.pick` |
