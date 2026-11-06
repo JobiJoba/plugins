@@ -243,6 +243,37 @@ importers:
         specifier: 6.0.3
         version: 6.0.3
 
+  plugins/places.decide-together:
+    dependencies:
+      zod:
+        specifier: 4.6.7
+        version: 4.6.7
+    devDependencies:
+      '@playwright/test':
+        specifier: 1.64.1
+        version: 1.64.1
+      '@types/node':
+        specifier: ^26.6.6
+        version: 26.6.6
+      '@types/react':
+        specifier: ^19.2.0
+        version: 19.3.0
+      esbuild:
+        specifier: ^0.28.2
+        version: 0.28.2
+      fflate:
+        specifier: ^0.8.3
+        version: 0.8.3
+      react:
+        specifier: ^19.2.0
+        version: 19.3.1
+      react-router:
+        specifier: ^7.9.0
+        version: 7.18.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+      typescript:
+        specifier: 6.0.3
+        version: 6.0.3
+
   plugins/places.menus:
     dependencies:
       zod:

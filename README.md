@@ -9,6 +9,7 @@ separate module server is required.
 
 | Module | What it adds | Host requirements | Documentation |
 | --- | --- | --- | --- |
+| **Decide Together** (`places.decide-together`) | Household shortlist voting and revealed favorites | SDK 1, `persistent-data`, household mode | [Decide Together guide](plugins/places.decide-together/README.md) |
 | **Day Out** (`places.day-out`) | Private outings around a saved place, nearby suggestions and MCP editing | SDK 1, `persistent-data` | [Day Out guide](plugins/places.day-out/README.md) |
 | **Board** (`places.board`) | Printable travel boards from 22 places, with editing and 3D preview | SDK 1, `persistent-data` | [Board guide](plugins/places.board/README.md) |
 | **Menus** (`places.menus`) | Structured menus, item photos and MCP editing on place details | SDK 0.2.0+, `place-sections` and `persistent-data` | [Menus guide](plugins/places.menus/README.md) |
@@ -21,6 +22,7 @@ separate module server is required.
 
    | Module | Install URL |
    | --- | --- |
+   | Decide Together | `https://github.com/JobiJoba/plugins#places.decide-together` |
    | Day Out | `https://github.com/JobiJoba/plugins#places.day-out` |
    | Board | `https://github.com/JobiJoba/plugins#places.board` |
    | Menus | `https://github.com/JobiJoba/plugins#places.menus` |
